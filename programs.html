@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs for Athletes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/tt-hoves-pro-trial');
+        body{
+            font-family: 'Montserrat', sans-serif;
+        }
+        .navbar-custom {
+            height: 100px;
+            background: transparent;
+        }
+        .autocomplete-suggestions {
+            display: none; 
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            list-style: none;
+            padding: 0;
+            max-height: 150px;
+            overflow-y: auto; 
+        }
+
+        .autocomplete-suggestions li {
+                padding: 0.5rem;
+                cursor: pointer;
+            }
+
+            .autocomplete-suggestions li:hover {
+                background-color: #f8f9fa;
+            }
+
+            .autocomplete-suggestions {
+                display: none;
+                top: 100%; 
+                width: 100%;
+                background-color: #fff;
+                border: 1px solid #ced4da;
+                list-style: none;
+                padding: 0;
+                max-height: 150px;
+            }
+
+            .autocomplete-suggestions li {
+                padding: 0.5rem;
+                cursor: pointer;
+                color: #123456;
+            }
+
+            .autocomplete-suggestions li:hover {
+                background-color: #f8f9fa;
+            }
+
+            .form-control:focus + .autocomplete-suggestions {
+                display: block; 
+            }
+            .navbar-custom .nav-link,
+            .navbar-custom .navbar-brand {
+                color: #fff; 
+                font-weight: 500;
+            }
+            .btn{
+                background-color: #204B72;
+                color: white;
+            }
+            .btn:hover{
+                background-color: #A8D5BA;
+            }
+            .header{
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background: linear-gradient(rgba(32, 75, 114, 0.6), rgba(32, 75, 114, 0.6)), url('assets/porgramheader.jpg') center/cover no-repeat;
+            } 
+            .program-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: 20px;
+            }
+
+            .program-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .program-card img {
+                width: 300px;
+                height: 250px;
+                object-fit: contain;
+                margin-bottom: 15px;
+                border-radius: 10px;
+            }
+            .testimonial-card {
+                background-color: #fff;
+                border-radius: 15px;
+                border: 1px solid #ddd;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .testimonial-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .testimonial-card img {
+                object-fit: cover;
+                border: 3px solid #204B72;
+            }
+
+            .testimonial-card .stars i {
+                font-size: 16px;
+            }
+            h2{
+                color: #204B72;
+            }
+            .programs h4{
+                color:#123456;
+            }
+            .programs p{
+                font-family: 'Montserrat', sans-serif;
+            }
+            .review-text{
+                color: #123456;
+            }
+            .testimonial-card{
+                min-height: 120px;
+            }
+            @media (max-width: 1200px) {
+                .nav-link {
+                    font-size: 12px;
+                }
+            }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-custom navbar-expand-lg shadow-sm fixed-top text-white bg-body-teriary">
+        <div class="container">
+            <a class="navbar-brand align-items-center" href="#">
+                <img src="assets/logooo.png" style="height: 70px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-light" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="services.html" data-bs-toggle="dropdown">Услуги</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html" class="dropdown-item">Послеоперационная реабилитация</a></li>
+                            <li><a href="services.html" class="dropdown-item">Лечение хронических заболеваний</a></li>
+                            <li><a href="services.html" class="dropdown-item">Спортивная реабилитация</a></li>
+                            <li><a href="services.html" class="dropdown-item">Профилактическое оздоровление</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="blog.html">Блог</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutUs.html">О клинике</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="programs.html">Программы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="homePage.html">Главная</a>
+                    </li>
+                </ul>
+                <form class="d-flex align-items-center position-relative" action="">
+                    <input type="search" placeholder="Поиск" class="form-control me-2">
+                    <ul class="autocomplete-suggestions position-absolute w-100">
+                        <li>Программы физической реабилитации</li>
+                        <li>Группы поддержки ментального здоровья</li>
+                        <li>Советы по восстановлению после операций</li>
+                    </ul>
+                    <input type="submit" value="Поиск" class="btn">
+                </form>
+            </div>
+        </div>
+    </nav>
+    <section class="header">
+        <h1 class="px-5 text-uppercase fw-bold">Программы для реабилитации спортсменов</h1>
+    </section>
+    <section class="rehab-programs p-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="text-uppercase fw-bold mb-4">Программы спортивной реабилитации</h2>
+                    <p>Наша спортивная реабилитация направлена на восстановление спортсменов после травм, улучшение их физической формы и предотвращение повторных повреждений. Мы используем передовые технологии, включая носимые устройства, индивидуальные планы восстановления и возможности телемедицины.</p>
+                    <p>Восстановление с нами включает:</p>
+                    <ul>
+                        <li>Индивидуально разработанные программы тренировок и терапии.</li>
+                        <li>Использование носимых датчиков для отслеживания прогресса.</li>
+                        <li>Дистанционные консультации через телемедицину.</li>
+                    </ul>
+                    <a href="#" class="btn mt-3">Подробнее</a>
+                </div>
+                <div class="col-md-6 text-center">
+                    <div class="video-wrapper">
+                        <iframe width="100%" height="410px"  src="https://www.youtube.com/embed/ymtgj9DVfKo" 
+                            title="Видео о спортивной реабилитации" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="programs py-5">
+        <div class="container">
+            <h2 class="text-center text-uppercase mb-4 fw-bold">Программы для спортсменов</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="program-card">
+                        <img src="assets/wearble.png" alt="Носимые устройства">
+                        <h4>Носимые устройства</h4>
+                        <p>Контролируйте здоровье и производительность с помощью носимых фитнес-гаджетов.</p>
+                        <button class="btn mt-3">Подробнее</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="program-card">
+                        <img src="assets/individual.jpg" alt="Индивидуальные планы">
+                        <h4>Индивидуальные планы</h4>
+                        <p>Персонализированные программы восстановления, разработанные специалистами.</p>
+                        <button class="btn mt-3">Подробнее</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="program-card">
+                        <img src="assets/telemedicine.jpg" alt="Телемедицина">
+                        <h4>Телемедицина</h4>
+                        <p>Получайте консультации и контроль специалистов онлайн, где бы вы ни находились.</p>
+                        <button class="btn mt-3">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="testimonial py-5">
+        <div class="container">
+            <h2 class="text-center text-uppercase mb-5 fw-bold">Отзывы спортсменов</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card text-center p-4 shadow h-100">
+                        <img src="assets/shedrova.jpg" alt="Ярослава Шведова" class="rounded-circle mb-3" width="100" height="100">
+                        <div class="stars mb-2">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <div class="review-text">
+                            <p class="text-muted">Спасибо «Daru» за помощь в восстановлении и подготовке к турнирам!</p>
+                            <h5 class="fw-bold">Ярослава Шведова</h5>
+                            <p class="text-muted small">Победительница двух турниров Большого шлема в парном разряде.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card text-center p-4 shadow h-100">
+                        <img src="assets/litvinenko.jpg" alt="Алексей Литвиненко" class="rounded-circle mb-3" width="100" height="100">
+                        <div class="stars mb-2">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <div class="review-text">
+                            <p class="text-muted">Спасибо «Daru» за возвращение в строй! Приятный сервис и атмосфера.</p>
+                            <h5 class="fw-bold">Алексей Литвиненко</h5>
+                            <p class="text-muted small">Чемпион зимних Азиатских игр 1999 и 2011 гг.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="testimonial-card text-center p-4 shadow h-100">
+                        <img src="assets/zhibek.jpg" alt="Жибек Куламбаева" class="rounded-circle mb-3" width="100" height="100">
+                        <div class="stars mb-2">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </div>
+                        <div class="review-text">
+                            <p class="text-muted">Хочу поблагодарить всех специалистов за отличную работу.</p>
+                            <h5 class="fw-bold">Жибек Куламбаева</h5>
+                            <p class="text-muted small">Член сборной Казахстана по теннису.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer bg-dark text-white py-4">
+        <div class="container">
+            <div class="row text-center text-md-start">
+                
+                <div class="col-md-4 mb-3">
+                    <h5 class="fw-bold">DARU</h5>
+                    <p>Первый цифровой реабилитационный центр в Казахстане.</p>
+                </div>
+    
+                
+                <div class="col-md-4 mb-3">
+                    <h5 class="fw-bold">Навигация</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Главная</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Услуги</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">О нас</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Контакты</a></li>
+                    </ul>
+                </div>
+    
+                
+                <div class="col-md-4 mb-3">
+                    <h5 class="fw-bold">Контакты</h5>
+                    <p><i class="bi bi-telephone"></i> +7 (708) 531-41-80</p>
+                    <p><i class="bi bi-envelope"></i> info@daru.kz</p>
+                    <p><i class="bi bi-geo-alt"></i> Астана, Казахстан</p>
+                </div>
+            </div>
+    
+            <hr class="border-light my-3">
+    
+            
+            <div class="text-center">
+                <a href="www.facebook.com" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="www.instagram.com" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="www.telegram.com" class="text-white"><i class="bi bi-telegram"></i></a>
+            </div>
+    
+            
+            <div class="text-center mt-3">
+                <p class="mb-0">&copy; 2025 DARU. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-srPZj+qaJOMKlv5SwGGybhYcsUEa00ipLhxHs7Tz4WENAAyA8eS+Y9OAlr3QejG1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wh/NKN/5RTikpJA52dCkOO3eBjGeBg5DviExR3Id3Gz9j/EBxHHFNjqGVFY9wUx/" crossorigin="anonymous"></script>
+    
+</body>
+</html>

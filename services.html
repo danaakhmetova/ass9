@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Services</title>
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/tt-hoves-pro-trial');
+         body {
+            font-family: 'Montserrat', sans-serif; 
+        }
+        .autocomplete-suggestions {
+            display: none; 
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            list-style: none;
+            padding: 0;
+            max-height: 150px;
+            overflow-y: auto; 
+        }
+
+        .autocomplete-suggestions li {
+                padding: 0.5rem;
+                cursor: pointer;
+        }
+        .autocomplete-suggestions li:hover {
+                background-color: #f8f9fa;
+            }
+
+            .autocomplete-suggestions {
+                display: none;
+                top: 100%; 
+                width: 100%;
+                background-color: #fff;
+                border: 1px solid #ced4da;
+                list-style: none;
+                padding: 0;
+                max-height: 150px;
+            }
+            .autocomplete-suggestions li {
+                padding: 0.5rem;
+                cursor: pointer;
+                color: #123456;
+            }
+
+            .autocomplete-suggestions li:hover {
+                background-color: #f8f9fa;
+            }
+
+            .form-control:focus + .autocomplete-suggestions {
+                display: block;
+            }
+            .navbar-custom .nav-link,
+            .navbar-custom .navbar-brand {
+                color: white; 
+                font-weight: 500;
+            }
+            .btn{
+                background-color: #204B72;
+                color: white;
+            }
+            .btn:hover{
+                background-color: #176BD9;
+            }
+        .service-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #fff;
+        }
+        .service-card img {
+            width: 100%;
+            height: auto;
+            max-height: 150px;
+            object-fit: cover;
+        }
+
+        .service-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color:#204B72;
+            margin: 15px 0;
+            text-align: center;
+            text-transform: 'Montserrat', sans-serif;
+
+        }
+
+        .service-card p {
+            color: #123456;
+            font-weight: 200;
+            text-align: center;
+            padding: 8px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px;
+        }
+        .header{
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background: linear-gradient(rgba(32, 75, 114, 0.6), rgba(32, 75, 114, 0.6)), url('assets/servicesheader.jpg') center/cover no-repeat;
+        } 
+        h2{
+            color: #fff;
+        }
+        .main-content{
+            background-color: #204B72;
+        }
+        .accordion-header{
+            background-color: #fff;
+        }
+        .accordion-button {
+            background-color: #fff; 
+            color: #123456; 
+        }
+        .accordion-button:hover {
+            background-color: lightgray ;
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: #A8D5BA; 
+            color: #fff;
+            box-shadow: none;
+        }
+        .service-section {
+            margin: 20px 0;
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .service-text {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        .testimonial {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #204B72;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #204B72;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .btn-2gis {
+            background-color: #A8D5BA;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-2gis:hover {
+            background-color: coral;
+            color: white;
+        }
+        .podrobnee{
+            font-family: 'Montserrat', sans-serif;
+        }
+        @media (max-width: 1200px) {
+                .nav-link {
+                    font-size: 12px;
+                }
+            }
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-custom navbar-expand-lg shadow-sm fixed-top text-white">
+        <div class="container">
+            <a class="navbar-brand align-items-center" href="#">
+                <img src="assets/logooo.png" style="height: 70px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-light" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="services.html" data-bs-toggle="dropdown">Услуги</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html" class="dropdown-item">Послеоперационная реабилитация</a></li>
+                            <li><a href="services.html" class="dropdown-item">Лечение хронических заболеваний</a></li>
+                            <li><a href="services.html" class="dropdown-item">Спортивная реабилитация</a></li>
+                            <li><a href="services.html" class="dropdown-item">Профилактическое оздоровление</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="blog.html">Блог</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutUs.html">О клинике</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="programs.html">Программы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="homePage.html">Главная</a>
+                    </li>
+                </ul>
+                <form class="d-flex align-items-center position-relative" action="">
+                    <input type="search" placeholder="Поиск" class="form-control me-2">
+                    <ul class="autocomplete-suggestions position-absolute w-100">
+                        <li>Программы физической реабилитации</li>
+                        <li>Группы поддержки ментального здоровья</li>
+                        <li>Советы по восстановлению после операций</li>
+                    </ul>
+                    <input type="submit" value="Найти" class="btn">
+                </form>
+            </div>
+        </div>
+    </nav>
+    <section class="header">
+        <h1 class="px-5 text-uppercase fw-bold">Наши Услуги</h1>
+    </section>
+    <div class="main-content container-fluid p-5">
+        <section class="services-seс">
+            <div class="row mt-4">
+                <div class="col-md-3">
+                    <div class="service-card">
+                        <img src="assets/img2.png" alt="Postop Rehab" width="250px" height="150px">
+                        <h4>Послеоперационная реабилитация</h4>
+                        <p>Программы для ортопедии, неврологии и кардиологии.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="service-card">
+                        <img src="assets/img3.jpg" alt="Chronic Diseases" width="250px" height="150px">
+                        <h4>Лечение хронических заболеваний</h4>
+                        <p>Специализированные программы лечения.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="service-card">
+                        <img src="assets/img4.jpg" alt="Sports Rehab" width="250px" height="150px">
+                        <h4>Спортивная<br>реабилитация</h4>
+                        <p>Восстановление с учётом вида спорта.</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="service-card">
+                        <img src="assets/img5.jpg" alt="Preventive Care" width="250px" height="150px">
+                        <h4>Профилактическое оздоровление</h4>
+                        <p>Для офисных работников и пожилых людей.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container py-5 text-light podrobnee-sec">
+            <h2 class="text-center mb-4 text-uppercase fw-bold">Подробнее...</h2>
+            <div class="service-section d-flex align-items-start">
+                <i class="bi bi-activity service-icon"></i>
+                <p class="service-text">
+                    <strong>Послеоперационная реабилитация:</strong> Программы для восстановления после операций в области ортопедии, неврологии и кардиологии. Мы предлагаем индивидуальные планы реабилитации, сочетающие современные технологии и профессиональный подход для достижения оптимальных результатов.
+                </p>
+            </div>
+            <div class="service-section d-flex align-items-start">
+                <i class="bi bi-heart service-icon"></i>
+                <p class="service-text">
+                    <strong>Лечение хронических заболеваний:</strong> Индивидуализированные программы для пациентов с хроническими заболеваниями. Наша цель — поддержание стабильного состояния здоровья, предотвращение обострений и улучшение общего качества жизни.
+                </p>
+            </div>
+            <div class="service-section d-flex align-items-start">
+                <i class="bi bi-trophy service-icon"></i>
+                <p class="service-text">
+                    <strong>Спортивная реабилитация:</strong> Комплексные программы восстановления для спортсменов, направленные на реабилитацию после травм и улучшение физической формы. Мы используем новейшие методы и технологии, чтобы спортсмены быстрее возвращались к тренировкам и соревнованиям.
+                </p>
+            </div>
+            <div class="service-section d-flex align-items-start">
+                <i class="bi bi-person-bounding-box service-icon"></i>
+                <p class="service-text">
+                    <strong>Профилактическое оздоровление:</strong> Программы, разработанные для офисных работников и пожилых людей. Они направлены на профилактику заболеваний, улучшение общего состояния организма и повышение жизненного тонуса.
+                </p>
+            </div>
+        </div>
+        <div class="container py-4 review">
+            <h2 class="text-center mb-4 text-uppercase fw-bold">Отзывы клиентов</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial">
+                        <img src="assets/fperson.jpg" alt="Ирина С.">
+                        <p class="testimonial-text">"Daru помог мне восстановиться после сложной операции. Профессионализм команды превзошел все мои ожидания."</p>
+                        <p class="testimonial-author">— Ирина С.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial">
+                        <img src="assets/person1.jpg" alt="Алексей Л.">
+                        <p class="testimonial-text">"Отличные программы для спортсменов! После травмы колена я смог вернуться к тренировкам быстрее, чем ожидал."</p>
+                        <p class="testimonial-author">— Алексей Л.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial">
+                        <img src="assets/babushka.jpg" alt="Наталья П.">
+                        <p class="testimonial-text">"Спасибо команде Daru за заботу и внимание. Телемедицинские консультации невероятно удобны для меня."</p>
+                        <p class="testimonial-author">— Наталья П.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="testimonial">
+                        <img src="assets/manpic.jpg" alt="Михаил К.">
+                        <p class="testimonial-text">"Потрясающий сервис! Рекомендую всем, кто хочет вернуться к активной жизни после травм."</p>
+                        <p class="testimonial-author">— Михаил К.</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="text-center mt-4">
+                <a href="https://2gis.ru" class="btn-2gis" target="_blank">Больше отзывов в 2GIS</a>
+            </div>
+        </div>
+        <section class="faq-section p-5">
+            <h2 class="text-center text-uppercase mb-4 fw-bold">Часто задаваемые вопросы</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq1">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                            Какие услуги включены в цифровую реабилитацию?
+                        </button>
+                    </h2>
+                    <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Цифровая реабилитация включает доступ к онлайн-упражнениям, видеороликам и виртуальному контролю выполнения.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                            Как записаться на первичную консультацию?
+                        </button>
+                    </h2>
+                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Вы можете записаться на консультацию через наш сайт или позвонив по контактному номеру.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                            Какие программы доступны для пожилых людей?
+                        </button>
+                    </h2>
+                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Мы предлагаем профилактическое оздоровление и реабилитационные программы, учитывающие возрастные особенности.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer class="footer bg-dark text-white py-4">
+        <div class="container">
+            <div class="row text-center text-md-start">
+                
+                <div class="col-md-4 mb-3">
+                    <h5 class="fw-bold">DARU</h5>
+                    <p>Первый цифровой реабилитационный центр в Казахстане.</p>
+                </div>
+    
+                
+                <div class="col-md-4 mb-3">
+                    <h5 class="fw-bold">Навигация</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Главная</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Услуги</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">О нас</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Контакты</a></li>
+                    </ul>
+                </div>
+    
+                
+                <div class="col-md-4 mb-3">
+                    <h5 class="fw-bold">Контакты</h5>
+                    <p><i class="bi bi-telephone"></i> +7 (708) 531-41-80</p>
+                    <p><i class="bi bi-envelope"></i> info@daru.kz</p>
+                    <p><i class="bi bi-geo-alt"></i> Астана, Казахстан</p>
+                </div>
+            </div>
+    
+            <hr class="border-light my-3">
+    
+            
+            <div class="text-center">
+                <a href="www.facebook.com" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                <a href="www.instagram.com" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                <a href="www.telegram.com" class="text-white"><i class="bi bi-telegram"></i></a>
+            </div>
+    
+            
+            <div class="text-center mt-3">
+                <p class="mb-0">&copy; 2025 DARU. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-srPZj+qaJOMKlv5SwGGybhYcsUEa00ipLhxHs7Tz4WENAAyA8eS+Y9OAlr3QejG1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wh/NKN/5RTikpJA52dCkOO3eBjGeBg5DviExR3Id3Gz9j/EBxHHFNjqGVFY9wUx/" crossorigin="anonymous"></script>
+</body>
+</html>
