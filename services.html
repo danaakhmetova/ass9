@@ -198,6 +198,44 @@
         .podrobnee{
             font-family: 'Montserrat', sans-serif;
         }
+        .btn-filter {
+                background-color: #fff;
+                color: black;
+                border: none;
+                padding: 10px 15px;
+                margin: 5px;
+                font-weight: bold;
+                border-radius: 5px;
+                transition: background 0.3s;
+            }
+            .btn-filter.active, .btn-filter:hover {
+                background-color: #A8D5BA;
+            }
+            .accordion-button {
+                background-color: #fff; 
+                color: #123456; 
+                font-size: 1.1rem;
+                font-weight: 500;
+                box-shadow: none;
+            }
+            .accordion-button:hover {
+                background-color: lightblue;
+            }
+            .accordion-button:not(.collapsed) {
+                background-color: #f8f9fa;
+                color: #A8D5BA;
+            }
+            .accordion-item {
+                border: none;
+                border-radius: 10px;
+                margin-bottom: 10px;
+                box-shadow: none;
+            }
+            .accordion-body {
+                font-size: 1rem;
+                color: #ddd;
+                padding: 15px;
+            }
         @media (max-width: 1200px) {
                 .nav-link {
                     font-size: 12px;
@@ -351,47 +389,60 @@
                 <a href="https://2gis.ru" class="btn-2gis" target="_blank">Больше отзывов в 2GIS</a>
             </div>
         </div>
-        <section class="faq-section p-5">
-            <h2 class="text-center text-uppercase mb-4 fw-bold">Часто задаваемые вопросы</h2>
-            <div class="accordion" id="faqAccordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="faq1">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                            Какие услуги включены в цифровую реабилитацию?
-                        </button>
-                    </h2>
-                    <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            Цифровая реабилитация включает доступ к онлайн-упражнениям, видеороликам и виртуальному контролю выполнения.
+        <section class="faq-section py-5">
+            <div class="container">
+                <h2 class="text-center text-uppercase mb-4 fw-bold" style="color: #fff;">Часто задаваемые вопросы</h2>
+                
+                <div class="text-center mb-4">
+                    <button class="btn btn-filter active" data-filter="all">Все</button>
+                    <button class="btn btn-filter" data-filter="services">О услугах</button>
+                    <button class="btn btn-filter" data-filter="booking">Запись и консультации</button>
+                    <button class="btn btn-filter" data-filter="other">Прочее</button>
+                </div>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item faq-item" data-category="services">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                Какие услуги включены в цифровую реабилитацию?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Цифровая реабилитация включает доступ к онлайн-упражнениям, видеороликам и виртуальному контролю выполнения.</div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="faq2">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                            Как записаться на первичную консультацию?
-                        </button>
-                    </h2>
-                    <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            Вы можете записаться на консультацию через наш сайт или позвонив по контактному номеру.
+                    <div class="accordion-item faq-item" data-category="booking">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Как записаться на первичную консультацию?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Вы можете записаться на консультацию через наш сайт или позвонив по контактному номеру.</div>
                         </div>
                     </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="faq3">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                            Какие программы доступны для пожилых людей?
-                        </button>
-                    </h2>
-                    <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            Мы предлагаем профилактическое оздоровление и реабилитационные программы, учитывающие возрастные особенности.
+                    <div class="accordion-item faq-item" data-category="services">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Какие программы доступны для пожилых людей?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Мы предлагаем профилактическое оздоровление и реабилитационные программы, учитывающие возрастные особенности.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item faq-item" data-category="other">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                Какие документы нужны для записи?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">Для записи на реабилитацию потребуется паспорт и медицинские документы, подтверждающие необходимость лечения.</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section>        
     </div>
     <footer class="footer bg-dark text-white py-4">
         <div class="container">
@@ -437,7 +488,26 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $(".btn-filter").click(function() {
+            let filter = $(this).data("filter");
+            
+            $(".btn-filter").removeClass("active");
+            $(this).addClass("active");
+            
+            if (filter === "all") {
+                $(".faq-item").show();
+            } else {
+                $(".faq-item").hide();
+                $(".faq-item[data-category='" + filter + "']").show();
+            }
+        });
+    });
+    </script>  
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-srPZj+qaJOMKlv5SwGGybhYcsUEa00ipLhxHs7Tz4WENAAyA8eS+Y9OAlr3QejG1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wh/NKN/5RTikpJA52dCkOO3eBjGeBg5DviExR3Id3Gz9j/EBxHHFNjqGVFY9wUx/" crossorigin="anonymous"></script>
 </body>
