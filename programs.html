@@ -227,6 +227,53 @@
             </div>
         </div>
     </nav>
+    $(document).ready(function () {
+        let takenEmails= ["test@example.com", "user@gmail.com", "admin@site.com"];
+        
+        $("#registerForm").submit(function (event) {
+            event.preventDefault();
+            $(".error").text("").hide();
+            let isValid = true;
+
+            let name = $("#name").val();
+            let email = $("#email").val();
+            let password = $("#password").val();
+            let phone = $("#phone").val();
+            let dob = new Date($("#dob").val());
+            let today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            
+            if (name.length < 3) {
+                $("#nameError").text("Имя должно иметь больше 3 букв").show();
+                isValid = false;
+            }
+            
+            if (!email.includes("@") || takenEmails.includes(email)) {
+                $("#emailError").text("Неправильный адрес почты или почта уже занята").show();
+                isValid = false;
+            }
+            
+            if (password.length < 6) {
+                $("#passwordError").text("Пароль должен состоять хотя бы из 6 символов").show();
+                isValid = false;
+            }
+            
+            if (!/^\+?[0-9]{10,14}$/.test(phone)) {
+                $("#phoneError").text("Неправильный формат ввода номера телефона").show();
+                isValid = false;
+            }
+            
+            if (age < 18) {
+                $("#dobError").text("Вы должны быть совершеннолетним").show();
+                isValid = false;
+            }
+            
+            if (isValid) {
+                $("#registerForm").hide();
+                $("#successMessage").fadeIn(1000);
+            }
+        });
+    });
     <section class="header">
         <h1 class="px-5 text-uppercase fw-bold">Программы для реабилитации спортсменов</h1>
     </section>

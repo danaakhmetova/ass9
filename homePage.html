@@ -195,7 +195,61 @@
             }
             .error { color: red; display: none; }
         #successMessage { display: none; color: green; font-weight: bold; }
+        /* Контейнер прогресса */
+/* Контейнер всей секции прогресса */
+.patients-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+}
 
+/* Контейнер прогресс-бара */
+#patients-progress-container {
+    width: 80%; /* Адаптивная ширина */
+    max-width: 600px; /* Ограничиваем максимальную ширину */
+    height: 20px;
+    background: #e0e0e0;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    margin: 10px auto; /* Центрируем */
+}
+
+/* Сам прогресс-бар */
+#patients-progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #A8D5BA, #176BD9, #204B72);
+    border-radius: 20px;
+    transition: width 2s ease-in-out;
+    position: relative;
+    box-shadow: 0px 0px 10px rgba(32, 75, 114, 0.5);
+}
+
+/* Текст и процент */
+#progress-percent {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 16px;
+    color: #204B72;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 768px) {
+    #patients-progress-container {
+        width: 90%; /* Делаем шире на мобильных */
+    }
+    #progress-percent {
+        font-size: 14px;
+    }
+}
 
             @media (max-width: 768px) {
                 .trusted .logo {
@@ -271,64 +325,69 @@
 </head>
 <body>
     <script>
-        $(document).ready(function () {
-            let takenEmails= ["test@example.com", "user@gmail.com", "admin@site.com"];
-            
-            $("#registerForm").submit(function (event) {
-                event.preventDefault();
-                $(".error").text("").hide();
-                let isValid = true;
+      $(document).ready(function () {
+    let takenEmails = ["test@example.com", "user@gmail.com", "admin@site.com"];
 
-                let name = $("#name").val();
-                let email = $("#email").val();
-                let password = $("#password").val();
-                let phone = $("#phone").val();
-                let dob = new Date($("#dob").val());
-                let today = new Date();
-                let age = today.getFullYear() - dob.getFullYear();
-                
-                if (name.length < 3) {
-                    $("#nameError").text("Имя должно иметь больше 3 букв").show();
-                    isValid = false;
-                }
-                
-                if (!email.includes("@") || takenEmails.includes(email)) {
-                    $("#emailError").text("Неправильный адрес почты или почта уже занята").show();
-                    isValid = false;
-                }
-                
-                if (password.length < 6) {
-                    $("#passwordError").text("Пароль должен состоять хотя бы из 6 символов").show();
-                    isValid = false;
-                }
-                
-                if (!/^\+?[0-9]{10,14}$/.test(phone)) {
-                    $("#phoneError").text("Неправильный формат ввода номера телефона").show();
-                    isValid = false;
-                }
-                
-                if (age < 18) {
-                    $("#dobError").text("Вы должны быть совершеннолетним").show();
-                    isValid = false;
-                }
-                
-                if (isValid) {
-                    $("#registerForm").hide();
-                    $("#successMessage").fadeIn(1000);
-                }
-            });
-        });
-        $(document).ready(function () {
-        let patients = 7205, max = 15000;
-        $("#patients-progress-bar").css("width", (patients / max) * 100 + "%");
+    $("#registerForm").submit(function (event) {
+        event.preventDefault();
+        $(".error").text("").hide();
+        let isValid = true;
 
-        let count = 0, interval = setInterval(() => {
-            $("#patients-count").text((count += 100) + " из " + max);
-            if (count >= patients) clearInterval(interval);
-        }, 50);
+        let name = $("#name").val();
+        let email = $("#email").val();
+        let password = $("#password").val();
+        let phone = $("#phone").val();
+        let dob = new Date($("#dob").val());
+        let today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+
+        if (name.length < 3 || /^\d/.test(name)) {
+            $("#nameError").text("Имя должно иметь больше 3 букв и не начинаться с цифры").show();
+            isValid = false;
+        }
+        if (!email.includes("@") || takenEmails.includes(email) || email.includes(" ")) {
+            $("#emailError").text("Неправильный email или он уже занят").show();
+            isValid = false;
+        }
+
+        if (password.length < 6 || password.length > 10 || !/^[A-Za-z0-9]+$/.test(password)) {
+            $("#passwordError").text("Пароль должен содержать 6-10 латинских букв и цифр").show();
+            isValid = false;
+        }
+
+        if (!/^\+?[0-9]{10,14}$/.test(phone)) {
+            $("#phoneError").text("Телефон должен начинаться с '+' и содержать 10-14 цифр").show();
+            isValid = false;
+        }
+
+        if (age < 18 || dob > today) {
+            $("#dobError").text("Вы должны быть совершеннолетним и дата не может быть в будущем").show();
+            isValid = false;
+        }
+
+        if (isValid) {
+            $("#registerForm").hide();
+            $("#successMessage").fadeIn(1000);
+        }
     });
+});        
+$(document).ready(function () {
+    let patients = 7500, max = 15000;
 
-    
+    let progressPercent = (patients / max) * 100;
+    $("#patients-progress-bar").css("width", progressPercent + "%");
+    $("#progress-percent").css("right", `calc(${progressPercent}% - 25px)`).text(Math.round(progressPercent) + "%");
+
+    let count = 0, interval = setInterval(() => {
+        count += 100;
+        $("#patients-count").text(count + " из " + max);
+        
+        if (count >= patients) {
+            clearInterval(interval);
+        }
+    }, 50);
+});
+
     </script>
 
     <nav class="navbar navbar-custom navbar-expand-lg shadow-sm fixed-top">
@@ -535,26 +594,18 @@
         </div>
     </section>
     
-    <section class="py-5" id="patients-helped">
-        <div class="container text-center">
-            <h2 class="mb-4">Количество пациентов, которым мы уже помогли</h2>
-        
-            <div class="progress mx-auto" style="width: 50%; height: 30px; background: #f3f6f9; border-radius: 5px; overflow: hidden;">
-                <div 
-                    class="progress-bar" 
-                    id="patients-progress-bar" 
-                    role="progressbar" 
-                    style="width: 0%; background: linear-gradient(90deg, #A8D5BA, #204B72); transition: width 2s ease-in-out;" 
-                    aria-valuenow="0" 
-                    aria-valuemin="0" 
-                    aria-valuemax="15000">
-                </div>
+    <div class="patients-section text-center">
+        <h3 class="mb-5">Количество пациентов, которым мы уже помогли</h3>
+        <div style="position: relative; width: 100%;">
+            <div id="patients-progress-container">
+                <div id="patients-progress-bar"></div>
             </div>
-        
-            <p class="mt-3 fw-bold fs-4" id="patients-count">0 из 15000</p>
-            <p class="text-muted" id="goal-text">Цель: 15,000 пациентов</p>
+            <span id="progress-percent">0%</span>
         </div>
-    </section>
+        <p id="patients-count" class="mt-3">7500 из 15000</p>
+        <p id="goal-text"><em>Цель: 15,000 пациентов</em></p>
+    </div>
+    
     <footer class="footer bg-dark text-white py-4 mt-5">
         <div class="container">
             <div class="row text-center text-md-start">

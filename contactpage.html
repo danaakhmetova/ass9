@@ -90,6 +90,81 @@
                 color: white;
                 transform: scale(1.1);
         } 
+        .discount-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: white;
+        padding: 40px;
+    }
+
+    /* Карточка с формой */
+    .discount-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        width: 100%;
+        transition: transform 0.3s ease;
+    }
+
+    .discount-card:hover {
+        transform: scale(1.02);
+    }
+
+    .discount-card h2 {
+        text-align: center;
+        color: #204B72;
+        font-size: 22px;
+    }
+    .form-check input[type="checkbox"] {
+        display: none;
+    }
+
+    .form-check label {
+        background: #F8F9FA;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: block;
+        transition: background 0.3s ease;
+    }
+
+    .form-check input[type="checkbox"]:checked + label {
+        background: #A8D5BA;
+        color: white;
+    }
+
+    /* Кнопка */
+    .btn-calculate {
+        background: #204B72;
+        color: white;
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        transition: background 0.3s ease;
+    }
+
+    .btn-calculate:hover {
+        background: #176BD9;
+    }
+
+    .discount-message {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .discount-message.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
         @media (max-width: 576px) {
             .navbar-custom {
                 height: 45px; 
@@ -204,28 +279,56 @@
 </style>        
 </head>
 <body>
-    <script>$(document).ready(function () {
-        $("#discountForm").submit(function (event) {
-            event.preventDefault();
-            $("#discountMessage").hide();
-    
-            let age = parseInt($("#age").val());
-            let programCost = parseInt($("#program").val());
-            let duration = parseInt($("#duration").val());
-            let totalCost = programCost * duration;
-            let discount = 0;
-    
-            if (age >= 60) {
-                discount = 50;
-            } else if (age < 18) {
-                discount = 30;
-            }
-    
-            let finalCost = totalCost - (totalCost * discount / 100);
-    
-            $("#discountMessage").html(`Итоговая стоимость: <strong>${finalCost.toFixed(2)} тг</strong> (Скидка: ${discount}%)`).fadeIn(500);
+    <script>
+        $(function () {
+    $("#discountForm").submit(function (event) {
+        event.preventDefault();
+        $("#discountMessage").removeClass("show").hide(); 
+
+        let age = parseInt($("#age").val());
+        let duration = parseInt($("#duration").val());
+        let totalCost = 0;
+        let discount = 0;
+        let selectedServices = $(".service-option:checked");
+        if (selectedServices.length === 0) {
+            $("#discountMessage").html(`<strong>Выберите хотя бы одну услугу!</strong>`).fadeIn(500).addClass("show");
+            return;
+        }
+        selectedServices.each(function () {
+            totalCost += $(this).val();
         });
+
+        totalCost *= duration; 
+        if (age >= 60) {
+            discount += 50;
+        } else if (age < 18) {
+            discount += 30;
+        }
+        let servicesCount = selectedServices.length;
+        if (servicesCount >= 3) {
+            discount += 10;
+        } else if (servicesCount >= 5) {
+            discount += 15;
+        }
+        if (duration >= 6) {
+            discount += 10;
+        } else if (duration >= 12) {
+            discount += 20;
+        }
+        if (discount > 60) {
+            discount = 60;
+        }
+
+        let finalCost = totalCost - (totalCost * discount / 100);
+
+        
+     $("#discountMessage").html(`💰 Итоговая стоимость: <strong>${finalCost.toFixed(2)} тг</strong> <br> (Скидка: ${discount}%)`).fadeIn(500).addClass("show");
+        
     });
+});
+
+
+
     </script>
     
     <nav class="navbar navbar-custom navbar-expand-lg shadow-sm ">
@@ -342,32 +445,53 @@
         </div>
     </div>
 </section>
-<div class="container">
-    <h2 class="text-center">Проверить актуальные скидки можете здесь!</h2>
-    <form id="discountForm">
-        <div class="mb-3">
-            <label for="age" class="form-label">Ваш возраст</label>
-            <input type="number" id="age" class="form-control" min="1">
-        </div>
-        <div class="mb-3">
-            <label for="program" class="form-label">Выберите услугу</label>
-            <select id="program" class="form-control">
-                    <option value="6000">Постоперационная реабилитация - от 6000тг</option>
-                    <option value="10000">Профилактика и поддержание здоровья - от 10000тг</option>
-                    <option value="5000">Консультация - 5000тг</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="duration" class="form-label">Период лечения (в месяцах)</label>
-            <input type="number" id="duration" class="form-control" min="1" value="1">
-        </div>
-        <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Рассчитать скидку</button>
-        </div>
-        
-    </form>
-    <div id="discountMessage" class="discount-message mt-3 text-center"></div>
-</div>
+
+            
+            <div class="discount-section">
+                <div class="discount-card">
+                    <h2>Рассчитать скидку</h2>
+                    <form id="discountForm">
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Ваш возраст</label>
+                            <input type="number" id="age" class="form-control" min="1">
+                        </div>
+            
+                        <div class="mb-3">
+                            <label class="form-label">Выберите услуги</label>
+                            <div class="form-check">
+                                <input class="service-option" type="checkbox" value="6000" id="service1">
+                                <label for="service1">Постоперационная реабилитация - 6000тг</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="service-option" type="checkbox" value="10000" id="service2">
+                                <label for="service2">Профилактика и поддержание здоровья - 10000тг</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="service-option" type="checkbox" value="5000" id="service3">
+                                <label for="service3">Консультация - 5000тг</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="service-option" type="checkbox" value="12000" id="service4">
+                                <label for="service4">Спортивная реабилитация - 12000тг</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="service-option" type="checkbox" value="8000" id="service5">
+                                <label for="service5">Физиотерапия - 8000тг</label>
+                            </div>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label for="duration" class="form-label">Период лечения (в месяцах)</label>
+                            <input type="number" id="duration" class="form-control" min="1" value="1">
+                        </div>
+            
+                        <button type="submit" class="btn btn-calculate">Рассчитать скидку</button>
+                    </form>
+            
+                    <div id="discountMessage" class="discount-message"></div>
+                </div>
+            </div>
+ 
 
 <section>
     <div class="container mb-5 pb-3">
