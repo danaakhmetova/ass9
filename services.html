@@ -122,21 +122,6 @@
         .main-content{
             background-color: #204B72;
         }
-        .accordion-header{
-            background-color: #fff;
-        }
-        .accordion-button {
-            background-color: #fff; 
-            color: #123456; 
-        }
-        .accordion-button:hover {
-            background-color: lightgray ;
-        }
-        .accordion-button:not(.collapsed) {
-            background-color: #A8D5BA; 
-            color: #fff;
-            box-shadow: none;
-        }
         .service-section {
             margin: 20px 0;
         }
@@ -200,16 +185,17 @@
         }
         .btn-filter {
                 background-color: #fff;
-                color: black;
+                color: #123456;
                 border: none;
                 padding: 10px 15px;
                 margin: 5px;
                 font-weight: bold;
                 border-radius: 5px;
                 transition: background 0.3s;
-            }
+        }
             .btn-filter.active, .btn-filter:hover {
                 background-color: #A8D5BA;
+                color: #123456;
             }
             .accordion-button {
                 background-color: #fff; 
@@ -219,11 +205,7 @@
                 box-shadow: none;
             }
             .accordion-button:hover {
-                background-color: lightblue;
-            }
-            .accordion-button:not(.collapsed) {
-                background-color: #f8f9fa;
-                color: #A8D5BA;
+                background-color: #A8D5BA;
             }
             .accordion-item {
                 border: none;
@@ -233,7 +215,7 @@
             }
             .accordion-body {
                 font-size: 1rem;
-                color: #ddd;
+                color: #123456;
                 padding: 15px;
             }
         @media (max-width: 1200px) {
@@ -392,17 +374,17 @@
         <section class="faq-section py-5">
             <div class="container">
                 <h2 class="text-center text-uppercase mb-4 fw-bold" style="color: #fff;">Часто задаваемые вопросы</h2>
-                
                 <div class="text-center mb-4">
                     <button class="btn btn-filter active" data-filter="all">Все</button>
                     <button class="btn btn-filter" data-filter="services">О услугах</button>
                     <button class="btn btn-filter" data-filter="booking">Запись и консультации</button>
                     <button class="btn btn-filter" data-filter="other">Прочее</button>
                 </div>
+                
                 <div class="accordion" id="faqAccordion">
                     <div class="accordion-item faq-item" data-category="services">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
                                 Какие услуги включены в цифровую реабилитацию?
                             </button>
                         </h2>
@@ -412,7 +394,7 @@
                     </div>
                     <div class="accordion-item faq-item" data-category="booking">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
                                 Как записаться на первичную консультацию?
                             </button>
                         </h2>
@@ -422,7 +404,7 @@
                     </div>
                     <div class="accordion-item faq-item" data-category="services">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
                                 Какие программы доступны для пожилых людей?
                             </button>
                         </h2>
@@ -432,7 +414,7 @@
                     </div>
                     <div class="accordion-item faq-item" data-category="other">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
                                 Какие документы нужны для записи?
                             </button>
                         </h2>
@@ -491,24 +473,24 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-    $(document).ready(function() {
-        $(".btn-filter").click(function() {
-            let filter = $(this).data("filter");
-            
-            $(".btn-filter").removeClass("active");
-            $(this).addClass("active");
-            
-            if (filter === "all") {
-                $(".faq-item").show();
-            } else {
-                $(".faq-item").hide();
-                $(".faq-item[data-category='" + filter + "']").show();
-            }
+        $(document).ready(function() {
+            $(".btn-filter").click(function() {
+                let filter = $(this).data("filter");
+
+                $(".btn-filter").removeClass("active");
+                $(this).addClass("active");
+
+                if (filter === "all") {
+                    $(".faq-item").show();
+                } else {
+                    $(".faq-item").hide();
+                    $(".faq-item[data-category='" + filter + "']").show();
+                }
+            });
         });
-    });
     </script>  
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-srPZj+qaJOMKlv5SwGGybhYcsUEa00ipLhxHs7Tz4WENAAyA8eS+Y9OAlr3QejG1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-wh/NKN/5RTikpJA52dCkOO3eBjGeBg5DviExR3Id3Gz9j/EBxHHFNjqGVFY9wUx/" crossorigin="anonymous"></script>
 </body>
 </html>
