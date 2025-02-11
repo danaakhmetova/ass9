@@ -285,19 +285,18 @@
         event.preventDefault();
         $("#discountMessage").removeClass("show").hide(); 
 
-        let age = parseInt($("#age").val());
-        let duration = parseInt($("#duration").val());
+        let age = ($("#age").val());
+        let duration = ($("#duration").val());
         let totalCost = 0;
         let discount = 0;
         let selectedServices = $(".service-option:checked");
-        if (selectedServices.length === 0) {
+        if (selectedServices.length == 0) {
             $("#discountMessage").html(`<strong>Выберите хотя бы одну услугу!</strong>`).fadeIn(500).addClass("show");
             return;
         }
-        selectedServices.each(function () {
-            totalCost += $(this).val();
-        });
-
+        for (let service of selectedServices) {
+        totalCost += Number($(service).val()); // Преобразуем и суммируем
+        }
         totalCost *= duration; 
         if (age >= 60) {
             discount += 50;
@@ -319,9 +318,7 @@
             discount = 60;
         }
 
-        let finalCost = totalCost - (totalCost * discount / 100);
-
-        
+        let finalCost = totalCost - (totalCost * discount / 100);        
      $("#discountMessage").html(`💰 Итоговая стоимость: <strong>${finalCost.toFixed(2)} тг</strong> <br> (Скидка: ${discount}%)`).fadeIn(500).addClass("show");
         
     });
